@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blog Web</title>
+    <!-- Include Bootstrap CSS from a CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Include jQuery and Bootstrap JavaScript from CDNs -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- Include Firebase JavaScript SDK -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-storage.js"></script>
+
+
+</head>
+
+<body class="h-100">
+    <!-- Navbar section -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Blog App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <!-- Navigation links -->
+                <li class="nav-item ">
+                    <a class="nav-link" onClick="switchView('home.html')"
+                        style="cursor: pointer; text-decoration: none; padding: 10px 15px; color: #d3dce6;">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onClick="switchView('myblogs.html')"
+                        style="cursor: pointer; text-decoration: none; padding: 10px 15px; color: #d3dce6;">My Blog</a>
+                </li>
+            </ul>
+        </div>
+        <div class="ml-auto">
+            <div class="dropdown">
+                <span class="text-light mr-2" id="user-email">Loading...</span>
+                <button class="btn btn-light dropdown-toggle" type="button" id="option-id" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Options
+                </button>
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="option-id">
+                    <a class="dropdown-item" id="btn-logout" href="#">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Main content section -->
+
+    <div class="row h-100 bg-light">
+        <div class="col-lg-0 bg-secondary">
+            <ul class="nav flex-column">
+
+            </ul>
+        </div>
+        <div class="col-lg-12">
+            <div class="container" id="container" style="text-align: center; padding: 20px;">
+                <h1 style="font-size: 36px; color: #007BFF; font-family: 'Georgia', serif;">Welcome to the Blog App</h1>
+                <p style="font-size: 18px; color: #333; font-family: 'Georgia', serif;">This is a simple blogging
+                    platform. Start sharing your thoughts and stories with the world.</p>
+                <p style="font-size: 18px; color: #333; font-family: 'Georgia', serif;">Visit <strong>Home</strong> You
+                    can create your own Blog Post by adding Description and Image then just Post</p>
+                <p style="font-size: 18px; color: #333; font-family: 'Georgia', serif;">Visit <strong>Home</strong> to
+                    view all blogs from all authenticated users who have posted any blog. You can filter by publisher
+                    name and sort by date or time in ascending or descending order.</p>
+                <p style="font-size: 18px; color: #333; font-family: 'Georgia', serif;">Visit <strong>My Blog</strong>
+                    to view the posts of the currently logged-in user.</p>
+
+
+                <img src="/design_files/images/download.jpeg" alt="Welcome Image"
+                    style="max-width: 100%; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); margin-top: 20px;">
+            </div>
+
+        </div>
+
+
+    </div>
+    <script src="js/index.js"></script>
+    <script>
+        // Firebase authentication check
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (!user) {
+                window.location.href = "signin.html";
+            }
+            else {
+                // If the user is logged in, update the email element with the user's email
+                document.getElementById('user-email').textContent = user.email;
+            }
+        });
+    </script>
+</body>
+
+</html>
